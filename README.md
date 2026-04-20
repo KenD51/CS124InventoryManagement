@@ -29,7 +29,7 @@ Current ideas  here:
    - The Branches (Level 1 & 2): These nodes are the containers. A node that contains links to sub-topics like "Search and Seizure" or "Right to Counsel" instead of the full law.
    - The Leaves (Level 3+): These are the leaf nodes. They contain the actual string data (the text of the law) and the metadata (the law number, the date it was passed).
 - The bottom line idea is that we try to create a search engine that parses the entire code and lets you go to the specific chapter or give a tldr very quickly.
-- Possible Node idea:
-<img width="898" height="456" alt="image" src="https://github.com/user-attachments/assets/ff4fc621-e3b9-47dc-91dd-ecb5cb6a40bd" />
+
+A single node can have the name of the node like "Article 4: something", a type such as the hierachy level "Article" or "Chapter", the children are more specific nodes like "Section: 2102" or "Section: 2104" and the LEAF NODES will have the actual text like "In California, you generally do not have to show ID unless you are being detained or are driving".
 
      
