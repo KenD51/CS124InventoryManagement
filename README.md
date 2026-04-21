@@ -48,11 +48,11 @@ Real-World Use Cases
 
 This type of system is useful in many everyday applications:
 
-personal contact lists (phone or email directories)
-business contact management systems
-customer relationship management (CRM) tools
-school or organization directories
-Example scenarios:
+- personal contact lists (phone or email directories)
+- business contact management systems
+- customer relationship management (CRM) tools
+- school or organization directories
+- Example scenarios:
 
 A user wants to quickly find a phone number by typing part of a name.
 
@@ -62,25 +62,27 @@ A student wants to organize classmates’ contact information and search by name
 
 Features
 
-add new contacts (name, phone number, email, etc.)
-edit existing contact information
-delete contacts
-search contacts by:
-name
-phone number
-email
-display all stored contacts
-optional: sort contacts alphabetically
-optional: group contacts by category (friends, work, school)
+- add new contacts (name, phone number, email, etc.)
+- edit existing contact information
+- delete contacts
+- search contacts by:
+- name
+- phone number
+- email
+- display all stored contacts
+- optional: sort contacts alphabetically
+- optional: group contacts by category (friends, work, school)
+
 Data Structures Used
 
-Hash map / unordered_map
+1. Hash map / unordered_map
 Used for fast lookup of contacts.
 
 Example:
 
-name → contact information
-Provides average constant-time access for searching and updating.
+- name → contact information
+- Provides average constant-time access for searching and updating.
+  
 2. Vector
 
 Used to store and display lists of contacts.
@@ -89,9 +91,10 @@ Used to store and display lists of contacts.
 
 Used to represent a contact with multiple fields such as:
 
-name
-phone number
-email
+- name
+- phone number
+- email
+  
 Algorithms Used
 
 Linear search
@@ -112,9 +115,9 @@ This project is simple, practical, and easy to demonstrate. It clearly shows how
 
 It is also highly extensible, allowing additional features such as:
 
-file saving/loading
-contact grouping
-search optimization
+- file saving/loading
+- contact grouping
+- search optimization
 //
 
 //
@@ -127,7 +130,8 @@ README 2: Inventory + Warehouse Optimization System
 
 Project Overview
 
-The Inventory + Warehouse Optimization System is a software application designed to manage products in a warehouse, track inventory levels, and improve the efficiency of item retrieval and restocking. The system simulates real warehouse operations by organizing item data, prioritizing tasks, and optimizing routes for workers or automated systems.
+The Inventory + Warehouse Optimization System is a software application designed to manage products in a warehouse, track inventory levels, and improve the efficiency of item retrieval and restocking. 
+The system simulates real warehouse operations by organizing item data, prioritizing tasks, and optimizing routes for workers or automated systems.
 
 This project demonstrates how data structures and algorithms can be used to solve practical logistics and supply chain problems.
 
@@ -135,11 +139,12 @@ Real-World Use Cases
 
 This type of system is useful in many real-world settings:
 
-e-commerce warehouses such as Amazon fulfillment centers
-grocery or retail backroom inventory systems
-manufacturing facilities that store parts and materials
-hospital supply storage and distribution
-shipping and logistics hubs
+- e-commerce warehouses such as Amazon fulfillment centers
+- grocery or retail backroom inventory systems
+- manufacturing facilities that store parts and materials
+- hospital supply storage and distribution
+- shipping and logistics hubs
+- 
 Example scenarios
 
 A warehouse employee needs to collect several items for an order. The system can determine the most efficient route through the warehouse.
@@ -150,18 +155,19 @@ A business wants to reduce wasted movement and improve order fulfillment time. T
 
 Features
 
-add, remove, and update inventory items
-track item quantities and storage locations
-search for products by name, ID, or category
-alert when items fall below a minimum stock threshold
-generate restocking priority lists
-optimize item-picking order for customer orders
-simulate warehouse layout as a graph of locations
-display shortest path to collect multiple items
-support category-based or aisle-based organization
+- add, remove, and update inventory items
+- track item quantities and storage locations
+- search for products by name, ID, or category
+- alert when items fall below a minimum stock threshold
+- generate restocking priority lists
+- optimize item-picking order for customer orders
+- simulate warehouse layout as a graph of locations
+- display shortest path to collect multiple items
+- support category-based or aisle-based organization
+  
 Data Structures Used
 
-Hash map / unordered_map
+1. Hash map / unordered_map
 Used for fast lookup of items by product ID or name.
 
 Example:
@@ -258,11 +264,12 @@ Real-World Use Cases
 
 This kind of system is useful in many real-world applications:
 
-desktop file management tools
-cloud storage platforms like Google Drive or Dropbox
-enterprise document search systems
-legal or medical record retrieval systems
-search bars in operating systems or websites
+- desktop file management tools
+- cloud storage platforms like Google Drive or Dropbox
+- enterprise document search systems
+- legal or medical record retrieval systems
+- search bars in operating systems or websites
+- 
 Example scenarios
 
 A user needs to find all files containing the word "budget" across many folders. The system returns matching files quickly.
@@ -273,35 +280,37 @@ A student wants a tool that organizes project folders and supports fast lookup b
 
 Features
 
-create and manage a hierarchical file directory structure
-add, rename, move, and delete files or folders
-search files by name
-search files by extension or type
-search by content keywords
-support recursive folder traversal
-display full file paths for matching results
-rank search results by relevance
-allow prefix-based autocomplete for filenames
-optionally track recently accessed files
+- create and manage a hierarchical file directory structure
+- add, rename, move, and delete files or folders
+- search files by name
+- search files by extension or type
+- search by content keywords
+- support recursive folder traversal
+- display full file paths for matching results
+- rank search results by relevance
+- allow prefix-based autocomplete for filenames
+- optionally track recently accessed files
+
 Data Structures Used
 
-Tree
+1. Tree
 Used to model the directory hierarchy.
 
 Example:
 
-root directory
-subfolders as children
-files stored within folder nodes
+- root directory
+- subfolders as children
+- files stored within folder nodes
+
 2. Hash map / unordered_map
 
 Used for quick file lookups and indexing.
 
 Example:
 
-keyword → list of files containing that keyword
-filename → file metadata
-Trie
+- keyword → list of files containing that keyword
+- filename → file metadata
+1. Trie
 
 Used for autocomplete or prefix-based filename search.
 
@@ -324,11 +333,11 @@ Such as DFS or BFS.
 
 Used to:
 
-explore folder structures
-list files recursively
-search through directories
-Inverted index construction
-Used to map words to the files containing them.
+- explore folder structures
+- list files recursively
+- search through directories
+- Inverted index construction
+- Used to map words to the files containing them.
 
 This is the same general concept used by search engines.
 
@@ -336,22 +345,22 @@ String matching
 
 Used for:
 
-file name queries
-keyword searches
-extension filtering
-Sorting / ranking
+- file name queries
+- keyword searches
+- extension filtering
+- Sorting / ranking
 
 Used to sort results by:
 
-match count
-recency
-alphabetical order
-path depth
+- match count
+- recency
+- alphabetical order
+- path depth
+
 Why This Project Is Strong
 
 This project has very clear DS&A relevance and mimics systems people use every day. It is practical, scalable, and easy to demo.
 
-A team can divide responsibilities like this:
 
 one person builds the file tree structure
 one person builds the keyword search/indexing system
