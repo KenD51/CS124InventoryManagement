@@ -2,7 +2,8 @@
 #define STOCK_ALERT_MANAGER_H
 
 #include "ItemTypes.h" //This is the base header for the ProductID type and other item-related definitions
-#include <vector>   
+#include <vector>
+#include <string>
 #include <unordered_map>
 
 //IDE has created much of the comments here for the header, and is subject to change.
@@ -13,15 +14,15 @@
  */
 class StockAlert {
     private:
-        ProductID id; // Unique identifier for the product
+        std::string id; // Unique identifier for the product
         std::string itemName;
         int currentQuantity;   // Current quantity of the item in stock
         int threshold;  // Minimum acceptable quantity before an alert is triggered
     public:
         // Constructor, initializes all member vatiables to create the Stockalert class.
-        StockAlert(const ProductID& id, const std::string& itemName, int currentQuantity, int threshold);
+        StockAlert(const std::string& id, const std::string& itemName, int currentQuantity, int threshold);
         // Getters
-        const ProductID& getId() const;
+        const std::string& getId() const;
         const std::string& getItemName() const;
         int getCurrentQuantity() const;
         int getThreshold() const;
@@ -36,7 +37,7 @@ class StockAlertManager {
 private:
     // Map of ProductIDs to their respective minimum stock thresholds. Simply put, we 
     // can use this map to create a "database" and check if a product(key) is below its threshold by comparing it to the current inventory.
-    std::unordered_map<ProductID, int> thresholds_;
+    std::unordered_map<std::string, int> thresholds_;
 public:
     // Constructor and Destructor
     StockAlertManager();
@@ -47,7 +48,7 @@ public:
      * @param id The unique identifier of the product. This is usually a string!
      * @param threshold The minimum acceptable quantity before an alert is triggered.
      */
-    void setMinimumThreshold(const ProductID& id, int threshold);
+    void setMinimumThreshold(const std::string& id, int threshold);
 
     /**
      * @brief Scans the current inventory map and returns a list of ALL items below their threshold. We will most likely traverse 
@@ -56,14 +57,14 @@ public:
      * @return A vector of StockAlert objects detailing the low stock items.
      */
 
-    std::vector<StockAlert> checkThresholds(const std::unordered_map<ProductID, int>& currentInventory) const;
+    std::vector<StockAlert> checkThresholds(const std::unordered_map<std::string, int>& currentInventory) const;
 
     /**
      * @brief Retrieves the current threshold for a specific product.
      * @param id The unique identifier of the product.
      * @return The minimum stock threshold, or 0 if not set.
      */
-    int getThreshold(const ProductID& id) const;
+    int getThreshold(const std::string& id) const;
 
 
 };

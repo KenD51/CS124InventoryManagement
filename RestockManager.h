@@ -4,6 +4,7 @@
 #include "ItemTypes.h"
 #include <vector>
 #include <queue>
+#include <string>
 
 /**
  * @brief Represents a task for restocking an item. Each RestockTask includes the product ID,
@@ -15,15 +16,15 @@
  */
 class RestockTask {
     private:
-        ProductID id;
+        std::string id;
         std::string itemName;
         int quantityNeeded;
         int urgencyScore; // Higher score indicates higher priority
     public:
         // Constructor to initialize all member variables of RestockTask.
-        RestockTask(const ProductID& id, const std::string& itemName, int quantityNeeded, int urgencyScore);
+        RestockTask(const std::string& id, const std::string& itemName, int quantityNeeded, int urgencyScore);
         // Getters for RestockTask member variables.
-        const ProductID& getId() const;
+        const std::string& getId() const;
         const std::string& getItemName() const;
         int getQuantityNeeded() const;
         int getUrgencyScore() const;
