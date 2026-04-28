@@ -28,6 +28,22 @@ This project demonstrates how data structures and algorithms can be used to solv
 4. Graph: Used to model warehouse layout.
 5. Set: Used to track visited locations or unique product categories.
 
+# MUST IMPLEMENT
+- Sorting Algorithm to sort products and inventory
+- Ensure it is linear or binary
+- Linked List - This is itemType, each product can be a linked list of all the attributes
+- Hash map - Done
+- Binary/search tree = hierarchy of items. Must implement BFS or DFS
+
+#Header Files we need
+- Binary Search tree - BFS or DFS
+- Sorting algorithm
+- Linear Search
+- Linked List/Node
+
+  
+Possibly graphs. Direction
+
 # Algorithms Used
 - Shortest path algorithm: Dijkstra’s algorithm. Used to find the fastest or shortest path through the warehouse to collect items.
 - Greedy algorithm: Used to determine a practical picking order or restocking sequence.
