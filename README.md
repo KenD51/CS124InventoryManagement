@@ -12,7 +12,7 @@ This project demonstrates how data structures and algorithms can be used to solv
 
 - add, remove, and update inventory items
 - track item quantities and storage locations
-- search for products by name, ID, or category
+- search for products by name, ID, or category (Started)
 - alert when items fall below a minimum stock threshold
 - generate restocking priority lists
 - optimize item-picking order for customer orders
@@ -29,25 +29,26 @@ This project demonstrates how data structures and algorithms can be used to solv
 5. Set: Used to track visited locations or unique product categories.
 
 # MUST IMPLEMENT
-- Sorting Algorithm to sort products and inventory
-- Ensure it is linear or binary
-- Linked List - This is itemType, each product can be a linked list of all the attributes
-- Hash map - Done
+- Sorting Algorithm to sort products and inventory (Started, Source, Merge)
+- Ensure it is linear or binary (Started)
+- Linked List - This is itemType, each product can be a linked list of all the attributes (Started, Source)
+- Hash map (Done)
 - Binary/search tree = hierarchy of items. Must implement BFS or DFS
-- File reader for CSV
+- File reader for CSV (Started)
 
 #Header Files we need
 - Binary Search tree - BFS or DFS
-- Sorting algorithm
+- Sorting algorithm (Started)
 - Linear Search
-- Linked List/Node
+- Linked List/Node (Started)
+- [OPTIONAL] Possibly graphs. Directional?
 
 # Updates 4/28
-- Added Merge Sorting Algorithm (WIP) (Header & Source included)
-- Started Linked List (Header, some source)
+- Added Merge Sorting Algorithm (WIP) (Header & Source included) (Darcie)
+- Started Linked List (Header, some source) (Kenshin)
+- Started on BST (Header, some source) (Kenshin)
 - Starting implemenetation of RBT (Aaron)
-  
-Possibly graphs. Direction
+- CSV Readers started (Aarom)
 
 # Algorithms Used
 - Shortest path algorithm: Dijkstra’s algorithm. Used to find the fastest or shortest path through the warehouse to collect items.
