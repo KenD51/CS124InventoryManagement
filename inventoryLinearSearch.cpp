@@ -21,5 +21,5 @@ void InventoryAlgorithms::sortInventoryByID(std::vector<Item>& inventory) {
 }
 
 void InventoryAlgorithms::sortInventoryByQuantity(std::vector<Item>& inventory) {
- mergeSort(inventory); // Still figuring out how to isolate by quantity
+  mergeSort(inventory); // Still figuring out how to isolate by quantity
 }
