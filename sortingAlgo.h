@@ -1,4 +1,5 @@
-
+#ifndef "SORTINGALGO_H"
+#define "SORTINGALGO_H"
 /**
  *  @brief Merges two adjacent rangs in an array (merge)
  *  @param from; the start of the first range
@@ -13,3 +14,5 @@ void merge(int a[], int from, int mid, int to);
  *  @param to; end of the range to sort
  */
 void merge_sort(int a[], int from, int to);
+
+#endif
