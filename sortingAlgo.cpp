@@ -33,7 +33,7 @@ void merge(int a[], int from, int mid, int to){
     j++;
   }
 
-  for (j = 0; j < n' j++){
+  for (j = 0; j < n; j++){
     a[from + j] = b[j];
   }
 
