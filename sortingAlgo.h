@@ -13,6 +13,6 @@ void merge(std::vector<int>& a, int from, int mid, int to);
  *  @param from; start o the range to sort
  *  @param to; end of the range to sort
  */
-void merge_sort(std::vector<int>& a, int from, int to);
+void mergeSort(std::vector<int>& a, int from, int to);
 
 #endif
