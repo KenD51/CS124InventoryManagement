@@ -50,6 +50,12 @@ This project demonstrates how data structures and algorithms can be used to solv
 - Starting implemenetation of RBT (Aaron)
 - CSV Readers started (Aarom)
 
+# Updates 4/29
+- Worked on Readers (Aaron)
+- Worked on stock alert and inventory management (Kenshin)
+- ReStockManager.cpp (Kenshin)
+- manager.cpp (Kenshin)
+
 # Algorithms Used
 - Shortest path algorithm: Dijkstra’s algorithm. Used to find the fastest or shortest path through the warehouse to collect items.
 - Greedy algorithm: Used to determine a practical picking order or restocking sequence.
