@@ -1,25 +1,22 @@
 #ifndef CS124INVENTORYMANAGEMENT_REDBLACKTREE_H
 #define CS124INVENTORYMANAGEMENT_REDBLACKTREE_H
-
-#include <string>
-#include <vector>
-
+#include <iostream>
 const int BLACK = 1;
 const int RED = 0;
 const int NEGATIVE_RED = -1;
 const int DOUBLE_BLACK = -2;
 
-/*
+/**
    This class implements a red-black tree.
 */
-class RedBlackTree
-{
+class RedBlackTree {
 public:
    /**
       Constructs an empty tree.
    */
    RedBlackTree();
    ~RedBlackTree();
+   //overloaded constructor
    RedBlackTree(const RedBlackTree& other); // Not implemented
    RedBlackTree& operator=(const RedBlackTree& other);  // Not implemented
 
@@ -27,21 +24,21 @@ public:
       Inserts a new element into the tree.
       @param element the element to insert
    */
-   void insert(string element);
+   void insert(std::string element);
 
    /**
       Tries to find an element in the tree.
       @param element the element to find
       @return 1 if the element is contained in the tree, 0 otherwise
    */
-   int count(string element) const;
+   int count(std::string element) const;
 
    /**
       Tries to remove an element from the tree. Does nothing
       if the element is not contained in the tree.
       @param element the element to remove
    */
-   void erase(string element);
+   void erase(std::string element);
 
    /**
       Prints the contents of the tree in sorted order.
@@ -146,18 +143,6 @@ private:
 public: // for testing
    Node* root;
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif //CS124INVENTORYMANAGEMENT_REDBLACKTREE_H

@@ -57,7 +57,7 @@ void RedBlackTree::insert(std::string element) {
     else { root->addNode(newNode); }
     fixAfterAdd(newNode);
 }
-int RedBlackTree::count(std::string element) {
+int RedBlackTree::count(std::string element) const {
     Node* current = root;
     while (current != nullptr) {
         if (element < current->data) {
