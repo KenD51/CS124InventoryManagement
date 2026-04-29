@@ -1,7 +1,7 @@
 #ifndef RESTOCK_MANAGER_H
 #define RESTOCK_MANAGER_H
 
-#include "ItemTypes.h"
+#include "itemType.h"
 #include <vector>
 #include <queue>
 #include <string>
@@ -31,7 +31,7 @@ class RestockTask {
 };
 
 /**
- * @class RestockManager
+ * @class restockManager
  * @brief Manages a priority queue to determine the optimal sequence for restocking items.
  */
 class RestockManager {

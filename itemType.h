@@ -4,11 +4,14 @@
 #include <string>
 
 
-struct Item {
+class Item {
+    Item();
+    Item(std::string id, std::string name, std::string description, int quantity, int minStockThreshold);
+
     std::string id; //Using alias here, product id is a string to uniquely identify the object (item)
     std::string name; // Name of the item
     std::string category;   // Category of the item 
-    int currentQuantity;    // Current quantity of the item in stock
+    int quantity;    // Current quantity of the item in stock
     int minStockThreshold; // Minimum stock threshold for the item, used for restocking alerts//
 };
 

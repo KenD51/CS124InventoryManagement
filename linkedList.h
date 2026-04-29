@@ -1,7 +1,7 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#include "ItemType.h"
+#include "itemType.h"
 #include <iostream>
 
 /**
@@ -24,9 +24,7 @@ private:
     Node* head;
 
 public:
-    LinkedList(){
-        head == nullptr;
-    }
+    LinkedList();
     ~LinkedList(); 
 
     /**

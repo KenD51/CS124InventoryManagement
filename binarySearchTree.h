@@ -13,7 +13,7 @@ struct TreeNode {
     TreeNode* left;
     TreeNode* right;
     
-    TreeNode(const Item& item) : data(item), left(nullptr), right(nullptr) {}
+    TreeNode(const Item& item);
 };
 
 /**
@@ -28,7 +28,7 @@ class InventoryBST {
         void dfsHelper(TreeNode* node, std::vector<Item>& result) const;
 
     public:
-        InventoryBST(){};
+        InventoryBST();
         ~InventoryBST(); // Defualt destructor but we will need to implement a function for destroying it.
 
         /**

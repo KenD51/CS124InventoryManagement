@@ -1,7 +1,7 @@
 #ifndef INVENTORY_ALGORITHMS_H
 #define INVENTORY_ALGORITHMS_H
 
-#include "ItemType.h"
+#include "itemType.h"
 #include <vector>
 #include <string>
 

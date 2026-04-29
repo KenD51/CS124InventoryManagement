@@ -1,7 +1,7 @@
 #ifndef STOCK_ALERT_MANAGER_H
 #define STOCK_ALERT_MANAGER_H
 
-#include "ItemTypes.h" //This is the base header for the ProductID type and other item-related definitions
+#include "itemType.h" //This is the base header for the ProductID type and other item-related definitions
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -29,7 +29,7 @@ class StockAlert {
 };
 
 /**
- * @class StockAlertManager
+ * @class stockAlertManager
  * @brief Monitors inventory levels and generates alerts for low stock.
  */
 class StockAlertManager {
