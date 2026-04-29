@@ -25,12 +25,18 @@ int StockAlert::getThreshold() const {
 StockAlertManager::StockAlertManager() {}
 StockAlertManager::~StockAlertManager() {}
 
-std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_map<std::string, int>& currentInventory) const {
-}
-
 void StockAlertManager::setMinimumThreshold(const std::string& id, int threshold) {
+    thresholds[id] = thresholds;
 }
 
 int StockAlertManager::getThreshold(const std::string &id) const {
-
+    if(thresholds.count(id))
+    {
+        return thresholds.at(id);
+    }
 }
+
+std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_map<std::string, int>& currentInventory) const {
+}
+
+
