@@ -25,18 +25,31 @@ bool RestockManager::isEmpty() const {
   return restockQueue.empty();
 }
 
+//Urgency is how many items are missing from target quantity;
 int RestockManager::calculateUrgency(const Item &item, int targetQuantity) const {
-
+    return targetQuantity - item.getQuantity;
 }
+
+//Restock Task will check will check if an item needs items, then it calculates the urgency add pushes a new object in queue with urgency factored in.
 void RestockManager::addRestockTask(const Item &item, int targetQuantity) {
-
+    int needed = targetQuantity - item.getQuantity();
+    if (needed > 0) {
+        int score = calculateUrgency(item, targetQuantity);
+        restockQueue.push(RestockTask(item.getId(), item.getName(), needed, score));
+    }
 }
+
+//We "process" an object in queue by peeking at it, than we can pop it.
 RestockTask RestockManager::popNextRestockTask() {
-
+    RestockTask topTask = restockQueue.top();
+    restockQueue.pop();
+    return topTask;
 }
+
 RestockTask RestockManager::peekNextRestockTask() const{
-
+    return restockQueue.top();
 }
+
 std::vector<RestockTask> RestockManager::generatePriorityList() const {
 
 }
