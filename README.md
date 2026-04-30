@@ -63,7 +63,7 @@ Good progress! There are a lot of specialized functionalities here! Are you sure
 
 # 4/29 What needs to be done
 
-- Finish sorting algo and have it executable (Darcie)
+- SortingAlgo.cpp (Needs to be worked on)
 - StockAlertManager.cpp (Finish and Testing)
 - RestockManager.cpp (Testing)
 - RBT (Testing)
