@@ -1,50 +1,46 @@
-#include sortingAlgo.h
-#include <vector>
+#include "sortingAlgo.h"
+#include "linkedList.h"
 
 // Merge function
-void merge(std::vector<int>& a, int from, int mid, int to) {
-    int n = to - from + 1;
-    std::vector<int> b(n);
+LinkedList::Node* merge(LinkedList::Node* left, LinkedList::Node* right) {
+    if (!left) return right;
+    if (!right) return left;
 
-    int i1 = from;
-    int i2 = mid + 1;
-    int j = 0;
-
-    while (i1 <= mid && i2 <= to) {
-        if (a[i1] < a[i2]) {
-            b[j] = a[i1];
-            i1++;
-        } else {
-            b[j] = a[i2];
-            i2++;
-        }
-        j++;
-    }
-
-    while (i1 <= mid) {
-        b[j] = a[i1];
-        i1++;
-        j++;
-    }
-
-    while (i2 <= to) {
-        b[j] = a[i2];  // fixed
-        i2++;
-        j++;
-    }
-
-    for (int k = 0; k < n; k++) {
-        a[from + k] = b[k];
+    // SORT BY ID (simple and direct)
+    if (left->data.getQuantity() < right->data.getQuantity()) {
+        left->next = merge(left->next, right);
+        return left;
+    } else {
+        right->next = merge(left, right->next);
+        return right;
     }
 }
 
+LinkedList::Node* getMiddle(LinkedList::Node* head) {
+    if (!head) return nullptr;
+
+    LinkedList::Node* slow = head;
+    LinkedList::Node* fast = head->next;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
 // Recursive merge sort
-void mergeSort(std::vector<int>& a, int from, int to) {
-    if (from >= to) return;
+LinkedList::Node* mergeSort(LinkedList::Node* head) {
+    if (!head || !head->next)
+        return head;
 
-    int mid = (from + to) / 2;
+    LinkedList::Node* mid = getMiddle(head);
+    LinkedList::Node* rightHalf = mid->next;
+    mid->next = nullptr;
 
-    merge_sort(a, from, mid);
-    merge_sort(a, mid + 1, to);
-    merge(a, from, mid, to);
+    LinkedList::Node* left = mergeSort(head);
+    LinkedList::Node* right = mergeSort(rightHalf);
+
+    return merge(left, right);
 }
