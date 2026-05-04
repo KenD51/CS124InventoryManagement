@@ -37,7 +37,7 @@ class StockAlertManager {
 private:
     // Map of ProductIDs to their respective minimum stock thresholds. Simply put, we 
     // can use this map to create a "database" and check if a product(key) is below its threshold by comparing it to the current inventory.
-    std::unordered_map<std::string, int> thresholds_;
+    std::unordered_map<std::string, int> minimumThresholds;
 public:
     // Constructor and Destructor
     StockAlertManager();
@@ -52,7 +52,7 @@ public:
 
     /**
      * @brief Scans the current inventory map and returns a list of ALL items below their threshold. We will most likely traverse 
-     * // the current inventory in the map and compare each product's quantity to its corresponding threshold in the thresholds_ map. 
+     * // the current inventory in the map and compare each product's quantity to its corresponding threshold in the minimumThresholds map. 
      * @param currentInventory A map of ProductIDs to their current quantities.
      * @return A vector of StockAlert objects detailing the low stock items.
      */
