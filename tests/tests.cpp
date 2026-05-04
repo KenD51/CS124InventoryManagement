@@ -28,6 +28,7 @@ LinkedList listInventory;
 
 // --- Initialize Dummy Data --- //
 void initializeTestData() {
+    std::cout << "Initializing test data...\n";  // Added debug output to track initialization
 
 
     // Create some sample items, I haven't used the csv functions yet.
@@ -41,10 +42,11 @@ void initializeTestData() {
     // Populate the trees, the lists, and tthe alert manager.
     for (const auto& item : warehouseInventory) {
         bstInventory.insert(item);
-        rbtInventory.insert(item.getId());
+        // rbtInventory.insert(item.getId());  // Commented out for debugging - RBT insert was causing crashes
         listInventory.insertAtEnd(item);
         alertSystem.setMinimumThreshold(item.getId(), item.getMinStockThreshold());
     }
+    std::cout << "Test data initialized successfully.\n";  // Added debug output
 }
 
 // --- Menu Displays --- //
@@ -212,19 +214,22 @@ void runComprehensiveTests() {
 }
 
 int main() {
+    std::cout << "Starting Warehouse System...\n";  // Added debug output to confirm program start
     // Populate systems with dummy data before showing menu
     initializeTestData();
 
     int choice;
     while (true) {
         displayMenu();
+        std::cout << "Waiting for input...\n";  // Added debug output before input
         if (!(std::cin >> choice)) {
-            // Here if the user enters something that isn't an integer we just clear it
+            // Here, if the user enters something that isn't an integer we just clear it
             std::cin.clear();
             std::cin.ignore(10000, '\n');
             continue;
         }
 
+        std::cout << "Received choice: " << choice << "\n";  // Added debug output after input
         //This part is copied and pasted from zybooks as I don't remember switch statemeents. 
         switch (choice) {
             case 1:
