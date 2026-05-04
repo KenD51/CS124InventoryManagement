@@ -1,6 +1,7 @@
 #ifndef CS124INVENTORYMANAGEMENT_REDBLACKTREE_H
 #define CS124INVENTORYMANAGEMENT_REDBLACKTREE_H
 #include <iostream>
+#include <string> // Added include for std::string to fix compilation errors
 const int BLACK = 1;
 const int RED = 0;
 const int NEGATIVE_RED = -1;
@@ -73,7 +74,7 @@ private:
       */
       void setRightChild(Node* child);
 
-      string data;
+      std::string data; // Changed from 'string' to 'std::string' to fix compilation error
       Node* left;
       Node* right;
       Node* parent;
