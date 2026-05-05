@@ -18,3 +18,17 @@ add_executable(CS124InventoryManagement
         src/csvFunctions.cpp
         src/itemType.cpp
 )
+
+# And since we are using tests, we need to add that as exexutables!
+add_executable(tests
+        tests/tests.cpp 
+        src/linkedList.cpp
+        src/binarySearchTree.cpp
+        src/inventoryLinearSearch.cpp
+        src/redBlackTree.cpp
+        src/restockManager.cpp
+        src/sortingAlgo.cpp
+        src/stockAlertManager.cpp
+        src/csvFunctions.cpp
+        src/itemType.cpp
+)
