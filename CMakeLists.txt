@@ -3,25 +3,18 @@ project(CS124InventoryManagement)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories(include)
 
+# We use src files so we need to adjust the pathing, that was causing the shenanigans
 add_executable(CS124InventoryManagement
-        linkedList.h
-        linkedList.cpp
-        main.cpp
-        itemType.h
-        restockManager.h
-        inventoryLinearSearch.h
-        stockAlertManager.h
-        csvFunctions.h
-        binarySearchTree.cpp
-        binarySearchTree.h
-        inventoryLinearSearch.h
-        inventoryLinearSearch.cpp
-        redBlackTree.cpp
-        redBlackTree.h
-        restockManager.cpp
-        restockManager.h
-        sortingAlgo.cpp
-        sortingAlgo.h
-        stockAlertManager.cpp
-        stockAlertManager.h)
+        src/main.cpp
+        src/linkedList.cpp
+        src/binarySearchTree.cpp
+        src/inventoryLinearSearch.cpp
+        src/redBlackTree.cpp
+        src/restockManager.cpp
+        src/sortingAlgo.cpp
+        src/stockAlertManager.cpp
+        src/csvFunctions.cpp
+        src/itemType.cpp
+)
