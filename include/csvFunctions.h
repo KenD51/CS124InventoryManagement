@@ -3,7 +3,7 @@
 #include <string>
 
 #include "linkedList.h"
-#include "RedBlackTree.h"
+#include "redBlackTree.h"
 
 bool loadFromFile(const std::string& filename, LinkedList& inventoryList, RedBlackTree& inventoryTree);
 
