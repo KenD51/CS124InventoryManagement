@@ -54,10 +54,11 @@ public:
      * @brief Scans the current inventory map and returns a list of ALL items below their threshold. We will most likely traverse 
      * // the current inventory in the map and compare each product's quantity to its corresponding threshold in the minimumThresholds map. 
      * @param currentInventory A map of ProductIDs to their current quantities.
+     * @param itemNames A map of ProductIDs to their item names.
      * @return A vector of StockAlert objects detailing the low stock items.
      */
 
-    std::vector<StockAlert> checkThresholds(const std::unordered_map<std::string, int>& currentInventory) const;
+    std::vector<StockAlert> checkThresholds(const std::unordered_map<std::string, int>& currentInventory, const std::unordered_map<std::string, std::string>& itemNames) const;
 
     /**
      * @brief Retrieves the current threshold for a specific product.

@@ -10,8 +10,8 @@
 #include "restockManager.h"        
 #include "inventoryLinearSearch.h" 
 
-// Color Codes for professional terminal output. I define the colors here by their ANSI 
-#define RESET   "\033[0m"
+// Color Codes for professional terminal output. I define the colors here by their ANSI escape, this is from geek
+#define RESET   "\033[0m" 
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
 #define YELLOW  "\033[33m"
@@ -43,7 +43,7 @@ void displayLogo() {
 void wait() {
     std::cout << "\n" << CYAN << "Press Enter to return to main menu..." << RESET;
     std::cin.ignore(100, '\n');
-    std::cin.get();
+    std::cin.get(); // Wait for the user to press Enter
 }
 
 // Hardcoded Data Initialization
@@ -154,12 +154,14 @@ int main() {
                 
                 // Create a map of inventory for the alert manager
                 std::unordered_map<std::string, int> currentInventory;
+                std::unordered_map<std::string, std::string> itemNames;
                 for (const auto& item : inventory) {
                     currentInventory[item.getId()] = item.getQuantity();
+                    itemNames[item.getId()] = item.getName();
                 }
                 
                 // Check thresholds, which will return a vector of items below min stocks.
-                std::vector<StockAlert> alerts = alertManager.checkThresholds(currentInventory);
+                std::vector<StockAlert> alerts = alertManager.checkThresholds(currentInventory, itemNames);
                 
                 // Display results in a table format. If there are no alerts, display a message indicating all items are above threshold.
                 if (alerts.empty()) {

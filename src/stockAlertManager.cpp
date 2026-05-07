@@ -25,7 +25,7 @@ int StockAlertManager::getThreshold(const std::string &id) const {
 }
 
 // Pushing checkThresholds logic
-std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_map<std::string, int>& currentInventory) const {
+std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_map<std::string, int>& currentInventory, const std::unordered_map<std::string, std::string>& itemNames) const {
     std::vector<StockAlert> alerts;
     
     // Traverse the current inventory map with two quantities, the id of the product and the currently 
@@ -38,8 +38,14 @@ std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_
         
         // If a threshold exists and the current stock has fallen below it
         if (minThreshold > 0 && currentQty < minThreshold) {
-            // Hey I think the map implementation needs tweaking as I don't have a name in the map. I used pending name as a placeholder.....
-            alerts.push_back(StockAlert(currentId, "Pending_Name", currentQty, minThreshold));
+            // Get the item name from the itemNames map
+            std::string name;
+            if (itemNames.count(currentId)) {
+                name = itemNames.at(currentId);
+            } else {
+                name = "Unknown";
+            }
+            alerts.push_back(StockAlert(currentId, name, currentQty, minThreshold));
         }
     }
     return alerts;
