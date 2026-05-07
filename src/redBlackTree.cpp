@@ -174,7 +174,7 @@ void RedBlackTree::print() const {
     std::cout << std::endl;
 }
 
-//inorder traversal to print
+//inorder traversal to print. 
 void RedBlackTree::print(Node* parent) const {
     if (parent == nullptr) { return; }
     print(parent->left);

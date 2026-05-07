@@ -30,5 +30,5 @@ add_executable(tests
         src/sortingAlgo.cpp
         src/stockAlertManager.cpp
         src/csvFunctions.cpp
-        src/itemType.cpp
+        src/itemType.cpp  
 )

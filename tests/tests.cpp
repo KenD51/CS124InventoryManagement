@@ -50,6 +50,22 @@ void initializeTestData() {
 }
 
 // --- Menu Displays --- //
+void displayLogo() {
+    // Raw String Literal allows us to print backslashes and special characters easily
+    std::string logo = R"(
+======================================================================
+  ___ _  _ _   _ ___ _  _ _____ ___  ______   __
+ |_ _| \| | | | | __| \| |_   _/ _ \| _ \ \ / /
+  | || .` | \_/ | _|| .` | | || (_) |   /\ V / 
+ |___|_|\_|\___/|___|_|\_| |_| \___/|_|_\ |_|  
+
+                  B Y   A D K  (Aaron, Darcie, Kenshin)
+======================================================================
+    )";
+
+    std::cout << logo << std::endl;
+}
+
 void displayMenu() {
     std::cout << "\n=======================================\n";
     std::cout << "||      WAREHOUSE SYSTEM v1.0        ||\n";
@@ -220,6 +236,7 @@ int main() {
 
     int choice;
     while (true) {
+        displayLogo();
         displayMenu();
         std::cout << "Waiting for input...\n";  // Added debug output before input
         if (!(std::cin >> choice)) {
