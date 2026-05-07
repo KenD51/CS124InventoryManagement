@@ -1,7 +1,7 @@
 #ifndef INVENTORY_BST_H
 #define INVENTORY_BST_H
 
-#include "ItemType.h"
+#include "itemType.h"
 #include <string>
 #include <vector>
 
