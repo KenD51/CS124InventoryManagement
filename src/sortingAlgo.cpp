@@ -6,7 +6,7 @@ LinkedList::Node* merge(LinkedList::Node* left, LinkedList::Node* right) {
     if (!left) return right;
     if (!right) return left;
 
-    // SORT BY ID (simple and direct)
+    // SORT BY Quantity (hard-coded)
     if (left->data.getQuantity() < right->data.getQuantity()) {
         left->next = merge(left->next, right);
         return left;
