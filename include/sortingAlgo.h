@@ -17,6 +17,4 @@ LinkedList::Node* merge(LinkedList::Node* left, LinkedList::Node* right);
 // Merge sort entry function
 LinkedList::Node* mergeSort(LinkedList::Node* head);
 
-
-
 #endif
