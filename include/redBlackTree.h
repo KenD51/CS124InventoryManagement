@@ -9,7 +9,8 @@ const int DOUBLE_BLACK = -2;
 
 /**
    This class implements a red-black tree.
-   Largely taken from Zybooks and adjusted to follow nested class format
+   Largely taken from Zybooks and adjusted to follow nested class format and deal with Item objects
+                                       -- credit to ZyBooks --
 */
 class RedBlackTree {
 public:
