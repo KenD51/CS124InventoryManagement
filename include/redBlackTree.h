@@ -146,6 +146,8 @@ private:
    */
    void fixNegativeRed(Node* negRed);
 
+   void DepthFirstSearch();
+
 public: // for testing
    Node* root;
 };

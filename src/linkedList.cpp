@@ -7,12 +7,7 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
-    Node* current = head;
-    while(current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
+    clear();
 }
 
 void LinkedList::insertAtStart(const Item& item) {
@@ -82,6 +77,17 @@ bool LinkedList::remove(const std::string& id){
         current = current->next;
     }
     return false;
+}
+void LinkedList::clear(){
+    Node* current = head;
+    while (current != nullptr) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
+    head = nullptr;
+    tail = nullptr;
+    count = 0;
 }
 int LinkedList::getCount() const {
     return count;

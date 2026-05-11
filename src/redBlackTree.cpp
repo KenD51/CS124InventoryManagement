@@ -403,3 +403,17 @@ void RedBlackTree::fixNegativeRed(Node* negRed) {
         fixDoubleRed(child->right);
     }
 }
+void DepthFirstSearch() {
+    if (root == nullptr) {
+        return;
+    }
+    std::stack<Node*> s;
+    q.push(root);
+    while (!q.empty()) {
+        Node* current = q.front();
+        q.pop();
+        if (current->right) { q.push(current->right);}
+        if (current->left) { q.push(current->left);}
+        std::cout << current->id << " ";
+    }
+}
