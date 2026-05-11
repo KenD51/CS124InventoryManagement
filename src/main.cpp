@@ -11,6 +11,7 @@
 #include "csvFunctions.h"          // Added CSV handling header
 #include "redBlackTree.h"
 #include "linkedList.h"
+#include <unordered_map> 
 
 // Color Codes for professional terminal output
 #define RESET   "\033[0m" 
@@ -209,12 +210,12 @@ int main() {
             case 5: { // Restocking
                 clearScreen();
                 std::cout << YELLOW << "--- GENERATING RESTOCKING PRIORITY ---" << RESET << std::endl;
-                
-                int targetQuantity = 20; 
+    
                 for (const auto& item : inventory) {
-                    restockManager.addRestockTask(item, targetQuantity);
-                }
-                
+                     //Fixing it so that target should be relative to the item's own threshold, like 50.
+                    int dynamicTarget = item.getMinStockThreshold() + 50; 
+                    restockManager.addRestockTask(item, dynamicTarget);
+    }
                 if (restockManager.isEmpty()) {
                     std::cout << GREEN << "No restocking needed. All items are at or above target levels." << RESET << std::endl;
                 } else {

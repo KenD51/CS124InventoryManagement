@@ -109,3 +109,13 @@ void LinkedList::display() const {
         current = current->next;
     }
 }
+
+//MEMORY LEAKS
+LinkedList::~LinkedList() {
+    Node* current = head;
+    while (current != nullptr) {
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+}
