@@ -24,6 +24,10 @@ int StockAlertManager::getThreshold(const std::string &id) const {
     return 0; // Fix: I added return 0 to have a default return value if there is no id.
 }
 
+void StockAlertManager::removeThreshold(const std::string& productId) {
+    minimumThresholds.erase(productId);
+}
+
 // Pushing checkThresholds logic
 std::vector<StockAlert> StockAlertManager::checkThresholds(const std::unordered_map<std::string, int>& currentInventory, const std::unordered_map<std::string, std::string>& itemNames) const {
     std::vector<StockAlert> alerts;

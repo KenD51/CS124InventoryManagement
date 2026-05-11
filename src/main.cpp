@@ -248,6 +248,7 @@ int main() {
                 int minStockThreshold;
 
                 std::cout << "Enter Product ID: ";
+                std::cin.ignore();
                 std::getline(std::cin, id);
                 std::cout << "Enter Product Name: ";
                 std::getline(std::cin, name);
@@ -257,6 +258,9 @@ int main() {
                 std::cin >> quantity;
                 std::cout << "Enter Threshold: ";
                 std::cin >> minStockThreshold;
+
+                //Fix for menu.
+                std::cin.ignore(100, '\n');
 
                 Item newItem(id, name, category, quantity, minStockThreshold);
 
@@ -290,7 +294,7 @@ int main() {
                 wait();
                 break;
             }
-            case 8: {
+            case 8: { //Delete
                 clearScreen();
                 std::cout << YELLOW << "--- DELETE PRODUCT FROM INVENTORY ---" << RESET << std::endl;
 
@@ -304,7 +308,7 @@ int main() {
                 else {
                     inventoryTree.erase(targetId);
                     inventoryList.remove(targetId);
-
+                    alertManager.removeThreshold(targetId);
                     for (auto it = inventory.begin(); it != inventory.end(); it++) {
                         if (it->getId() == targetId) {
                             inventory.erase(it);

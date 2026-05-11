@@ -66,6 +66,12 @@ public:
      * @return The minimum stock threshold, or 0 if not set.
      */
     int getThreshold(const std::string& id) const;
+ 
+   /**
+     * @brief Removes the current threshold for a specific product.
+     * @param id The unique identifier of the product.
+     */
+    void removeThreshold(const std::string& productId);
 
 
 };
