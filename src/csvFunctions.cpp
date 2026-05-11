@@ -55,8 +55,7 @@ void loadInventoryFromCSV(const std::string& filename, std::vector<Item>& invent
 
             //This is personal fluff, but because we have category, and product id, I combined them toghether to make it more user friendly
             std::string name = category + " Model " + productId.substr(1); 
-            int defaultThreshold = 20; // Set a default threshold for all products. Huge oversight as we don't have a threshold column. We should be able to change the threshold..
-
+            int defaultThreshold = 20; // Set a default threshold for all products. Will work on this tomorrow.
             // Create the item and add it to the inventory and alert manager
             inventory.push_back(Item(productId, name, category, quantity, defaultThreshold));
             alertManager.setMinimumThreshold(productId, defaultThreshold);
