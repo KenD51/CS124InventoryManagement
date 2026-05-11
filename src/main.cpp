@@ -11,6 +11,7 @@
 #include "csvFunctions.h"          // Added CSV handling header
 #include "redBlackTree.h"
 #include "linkedList.h"
+#include "heapSort.h"
 #include <unordered_map> 
 
 // Color Codes for professional terminal output
@@ -107,7 +108,8 @@ int main() {
         std::cout << "7. Search Product in Inventory Tree" << std::endl;
         std::cout << "8. Delete Product from Inventory" << std::endl;
         std::cout << "9. Print Inventory in-order (ID based)" << std::endl;
-        std::cout << "10. Exit System" << std::endl;
+        std::cout << "10. Sort by Name (Heap Sort)" << std::endl; // <--- NEW
+        std::cout << "11. Exit System" << std::endl;
         std::cout << "\nSelect an operation: ";
 
         int choice;
@@ -280,6 +282,7 @@ int main() {
 
                 std::string targetId;
                 std::cout << "Enter Product ID to search: ";
+                std::cin.ignore(); // FIX: Added missing ignore to prevent skipping!
                 std::getline(std::cin, targetId);
 
                 Item* foundItem = inventoryTree.search(targetId);
@@ -294,12 +297,13 @@ int main() {
                 wait();
                 break;
             }
-            case 8: { //Delete
+            case 8: { // Delete
                 clearScreen();
                 std::cout << YELLOW << "--- DELETE PRODUCT FROM INVENTORY ---" << RESET << std::endl;
 
                 std::string targetId;
                 std::cout << "Enter Product ID to delete: ";
+                std::cin.ignore(); // FIX: Added missing ignore to prevent skipping!
                 std::getline(std::cin, targetId);
 
                 if (inventoryTree.count(targetId) == 0){
@@ -320,7 +324,7 @@ int main() {
                 wait();
                 break;
             }
-            case 9: {
+            case 9: { // Print In-Order
                 clearScreen();
                 std::cout << YELLOW << "--- PRINT INVENTORY IN-ORDER BY ID---" << RESET << std::endl;
 
@@ -329,7 +333,17 @@ int main() {
                 wait();
                 break;
             }
-            case 10: {
+            case 10: { // NEW: Heap Sort by Name
+                clearScreen();
+                std::cout << "\nSorting inventory alphabetically by product name using Heap Sort..." << std::endl;
+                
+                heapSortByName(inventory); // Call your new function!
+                
+                std::cout << GREEN << "Sort Complete. View 'Full Inventory Report' (Option 1) to see results." << RESET << std::endl;
+                wait();
+                break;
+            }
+            case 11: { // MOVED: Exit
                 std::cout << "Exiting ADK Warehouse Optimizer. Security log closed." << std::endl;
                 running = false;
                 break;

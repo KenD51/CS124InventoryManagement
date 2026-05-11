@@ -17,6 +17,7 @@ add_executable(CS124InventoryManagement
         src/stockAlertManager.cpp
         src/csvFunctions.cpp
         src/itemType.cpp
+        src/heapSort.cpp
 )
 
 # And since we are using tests, we need to add that as exexutables!
