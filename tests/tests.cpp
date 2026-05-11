@@ -113,14 +113,12 @@ void displayRestockPriority() {
 
     // 1. Map current inventory for the Alert Manager
     std::unordered_map<std::string, int> currentStockMap;
-    std::unordered_map<std::string, std::string> itemNames;
     for (const auto& item : warehouseInventory) {
         currentStockMap[item.getId()] = item.getQuantity();
-        itemNames[item.getId()] = item.getName();
     }
 
     // 2. Check thresholds to generate alerts
-    std::vector<StockAlert> alerts = alertSystem.checkThresholds(currentStockMap, itemNames);
+    std::vector<StockAlert> alerts = alertSystem.checkThresholds(currentStockMap);
     std::cout << "Found " << alerts.size() << " items below minimum threshold.\n\n";
 
     // 3. Add alerts to the restock priority queue

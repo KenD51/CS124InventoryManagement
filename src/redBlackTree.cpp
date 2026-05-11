@@ -179,14 +179,12 @@ void RedBlackTree::print(Node* parent) const {
     if (parent == nullptr) { return; }
     print(parent->left);
     std::cout << parent->data.getName();
-    /*
     if (parent->color == RED) {
         std::cout << " [red in memory]";
     }
     else {
         std::cout << " [black in memory]";
     }
-    */
     std::cout << std::endl;
     print(parent->right);
 }
