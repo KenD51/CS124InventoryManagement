@@ -6,10 +6,6 @@ LinkedList::LinkedList() {
     count = 0;
 }
 
-LinkedList::~LinkedList() {
-    clear();
-}
-
 void LinkedList::insertAtStart(const Item& item) {
     Node* newNode = new Node(item);           //node created
     if (head == nullptr) {                                                  //if empty
@@ -78,17 +74,7 @@ bool LinkedList::remove(const std::string& id){
     }
     return false;
 }
-void LinkedList::clear(){
-    Node* current = head;
-    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
-    head = nullptr;
-    tail = nullptr;
-    count = 0;
-}
+
 int LinkedList::getCount() const {
     return count;
 }

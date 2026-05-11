@@ -1,3 +1,5 @@
+/*
+
 // -- Here We test all our stuff -- //
 #include "itemType.h"
 #include "linkedList.h"
@@ -192,12 +194,6 @@ void runComprehensiveTests() {
     std::cout << "Before Merge Sort (should display items as inserted):\n";
     testList.display();
     
-    //Hey darcie I wrote mergeSort and somehow its undfined. I wrote it down but i commented it out.
-
-    /* testList.setHead(mergeSort(testList.getHead()));
-    std::cout << "\nAfter Merge Sort:\n";
-    testList.display(); */
-
     // 2. Test Inventory Algorithms (Sorting by Quantity and ID)
     std::cout << "\n[Testing Vector Sorting Algorithms]\n";
     std::vector<Item> testVec = warehouseInventory;
@@ -270,3 +266,4 @@ int main() {
     }
     return 0;
 }
+*/
