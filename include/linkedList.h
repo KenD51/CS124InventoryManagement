@@ -43,6 +43,11 @@ public:
      */
     void insertAfter(Node* node, const Item& item);
     /**
+     * @brief searches for and removes node based on ID
+     * @returns bool
+     */
+    bool remove(const std::string& id);
+    /**
      * @brief returns count
      */
     int getCount() const;

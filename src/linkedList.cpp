@@ -47,7 +47,42 @@ void LinkedList::insertAfter(Node* node, const Item& item) {
     node->next = newNode;                   //update passed in node to point to the new node
     count++;
 }
+bool LinkedList::remove(const std::string& id){
+    if(head == nullptr) {
+        return false;
+    }
+    if (head->data.getId() == id) {
+        Node* nodeToDelete = head;
+        head = head->next;
 
+        if (tail == nodeToDelete) {
+            tail = nullptr;
+        }
+
+        delete nodeToDelete;
+        count--;
+        return true;
+    }
+
+    Node* current = head;
+    while (current->next != nullptr) {
+        if (current->next->data.getId() == id) {
+            Node* nodeToDelete = current->next;
+
+            current->next = nodeToDelete->next;
+
+            if (tail == nodeToDelete) {
+                tail = current;
+            }
+
+            delete nodeToDelete;
+            count--;
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
 int LinkedList::getCount() const {
     return count;
 }

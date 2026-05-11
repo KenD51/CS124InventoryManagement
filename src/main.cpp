@@ -9,6 +9,8 @@
 #include "restockManager.h"        
 #include "inventoryLinearSearch.h" 
 #include "csvFunctions.h"          // Added CSV handling header
+#include "redBlackTree.h"
+#include "linkedList.h"
 
 // Color Codes for professional terminal output
 #define RESET   "\033[0m" 
@@ -52,6 +54,8 @@ int main() {
     StockAlertManager alertManager;
     RestockManager restockManager;
     InventoryAlgorithms searchAlgo;
+    RedBlackTree inventoryRBT;
+    LinkedList inventoryList;
     
     // --- NEW: Dataset Selection Menu ---
     clearScreen(); 
@@ -98,7 +102,11 @@ int main() {
         std::cout << "3. Run Stock Alert Audit" << std::endl;
         std::cout << "4. Sort by Quantity" << std::endl;
         std::cout << "5. Generate Restocking List" << std::endl;
-        std::cout << "6. Exit System" << std::endl;
+        std::cout << "6. Insert Product into Inventory Tree" << std::endl;
+        std::cout << "7. Search Product in Inventory Tree" << std::endl;
+        std::cout << "8. Delete Product from Inventory" << std::endl;
+        std::cout << "9. Print Inventory in-order (ID based)" << std::endl;
+        std::cout << "10. Exit System" << std::endl;
         std::cout << "\nSelect an operation: ";
 
         int choice;
@@ -228,7 +236,95 @@ int main() {
                 wait();
                 break;
             }
-            case 6: { // Exit
+            case 6: { // Insert
+                clearScreen();
+                std::cout << YELLOW << "--- INSERT PRODUCT INTO INVENTORY ---" << RESET << std::endl;
+
+                std::string id;
+                std::string name;
+                std::string category;
+                int quantity;
+                int minStockThreshold;
+
+                std::cout << "Enter Product ID: ";
+                std::getline(std::cin, id);
+                std::cout << "Enter Product Name: ";
+                std::getline(std::cin, name);
+                std::cout << "Enter Category: ";
+                std::getline(std::cin, category);
+                std::cout << "Enter Quantity: ";
+                std::cin >> quantity;
+                std::cout << "Enter Threshold: ";
+                std::cin >> minStockThreshold;
+
+                Item newItem(id, name, category, quantity, minStockThreshold);
+
+                inventoryTree.insert(newItem);
+                inventoryList.insertAtEnd(newItem);
+                inventory.push_back(newItem);
+
+                alertManager.setMinimumThreshold(id, minStockThreshold);
+
+                std::cout << GREEN << "Item Inserted." << RESET << std::endl;
+                wait();
+                break;
+            }
+            case 7: { // Search
+                clearScreen();
+                std::cout << YELLOW << "--- SEARCH FOR PRODUCT IN INVENTORY ---" << RESET << std::endl;
+
+                std::string targetId;
+                std::cout << "Enter Product ID to search: ";
+                std::getline(std::cin, targetId);
+
+                Item* foundItem = inventoryTree.search(targetId);
+
+                if (foundItem != nullptr) {
+                    std::cout << GREEN << "Item Found." << RESET << std::endl;
+                    std::cout << foundItem->getId() << std::endl;
+                }
+                else {
+                    std::cout << RED << "Item not found." << RESET << std::endl;
+                }
+                wait();
+                break;
+            }
+            case 8: {
+                clearScreen();
+                std::cout << YELLOW << "--- DELETE PRODUCT FROM INVENTORY ---" << RESET << std::endl;
+
+                std::string targetId;
+                std::cout << "Enter Product ID to delete: ";
+                std::getline(std::cin, targetId);
+
+                if (inventoryTree.count(targetId) == 0){
+                    std::cout << RED << "Item not found." << RESET << std::endl;
+                }
+                else {
+                    inventoryTree.erase(targetId);
+                    inventoryList.remove(targetId);
+
+                    for (auto it = inventory.begin(); it != inventory.end(); it++) {
+                        if (it->getId() == targetId) {
+                            inventory.erase(it);
+                            break;
+                        }
+                    }
+                    std::cout << GREEN << "Item Deleted." << RESET << std::endl;
+                }
+                wait();
+                break;
+            }
+            case 9: {
+                clearScreen();
+                std::cout << YELLOW << "--- PRINT INVENTORY IN-ORDER BY ID---" << RESET << std::endl;
+
+                inventoryTree.print();
+
+                wait();
+                break;
+            }
+            case 10: {
                 std::cout << "Exiting ADK Warehouse Optimizer. Security log closed." << std::endl;
                 running = false;
                 break;
