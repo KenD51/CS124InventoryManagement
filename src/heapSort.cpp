@@ -16,7 +16,8 @@ void fixHeapByName(std::vector<Item> &inventory, int rootIndex, int lastIndex) {
 
     while (!done) {
         int leftChildIndex = getLeftChild(index);
-        if (leftChildIndex != lastIndex) {
+        // If left child exists
+        if (leftChildIndex <= lastIndex) {
             int rightChildIndex = getRightChild(index);
             // grabs child with larger alphabetical name
             if (rightChildIndex <= lastIndex && inventory[leftChildIndex].getName() < inventory[rightChildIndex].getName()) {
