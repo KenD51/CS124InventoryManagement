@@ -1,6 +1,7 @@
 #include "redBlackTree.h"
 #include "itemType.h"
 #include <iostream>
+#include <stack>
 
 RedBlackTree::Node::Node() {
     left = nullptr;
@@ -403,17 +404,17 @@ void RedBlackTree::fixNegativeRed(Node* negRed) {
         fixDoubleRed(child->right);
     }
 }
-void DepthFirstSearch() {
+void RedBlackTree::DepthFirstSearch() {
     if (root == nullptr) {
         return;
     }
     std::stack<Node*> s;
-    q.push(root);
-    while (!q.empty()) {
-        Node* current = q.front();
-        q.pop();
-        if (current->right) { q.push(current->right);}
-        if (current->left) { q.push(current->left);}
-        std::cout << current->id << " ";
+    s.push(root);
+    while (!s.empty()) {
+        Node* current = s.top();
+        s.pop();
+        if (current->right) { s.push(current->right);}
+        if (current->left) { s.push(current->left);}
+        std::cout << current-> data.getId() << " ";
     }
 }

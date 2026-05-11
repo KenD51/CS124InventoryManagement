@@ -55,7 +55,7 @@ int main() {
     StockAlertManager alertManager;
     RestockManager restockManager;
     InventoryAlgorithms searchAlgo;
-    RedBlackTree inventoryRBT;
+    RedBlackTree inventoryTree; //Fix: Mismatch named.
     LinkedList inventoryList;
     
     // --- NEW: Dataset Selection Menu ---
