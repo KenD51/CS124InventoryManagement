@@ -3,26 +3,26 @@
 #include <string>
 #include <iomanip>
 
-
 #include "itemType.h"              
 #include "sortingAlgo.h"           
 #include "stockAlertManager.h"     
 #include "restockManager.h"        
 #include "inventoryLinearSearch.h" 
+#include "csvFunctions.h"          // Added CSV handling header
 
-// Color Codes for professional terminal output. I define the colors here by their ANSI escape, this is from geek
+// Color Codes for professional terminal output
 #define RESET   "\033[0m" 
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
 #define YELLOW  "\033[33m"
 #define CYAN    "\033[36m"
 
-// UI Helper Functions to clear the screen to make it look more professional.
+// UI Helper Functions
 void clearScreen() {
-#ifdef _WIN32 // Windows
-    system("cls");  // Clear the console on Windows
+#ifdef _WIN32 
+    system("cls");  
 #else
-    system("clear");    // Clear the console on Unix/Linux/Mac
+    system("clear");    
 #endif 
 }
 
@@ -39,44 +39,57 @@ void displayLogo() {
     )" << RESET << std::endl;
 }
 
-//Wait for user input to return to the main menu after the operation.
 void wait() {
     std::cout << "\n" << CYAN << "Press Enter to return to main menu..." << RESET;
     std::cin.ignore(100, '\n');
-    std::cin.get(); // Wait for the user to press Enter
+    std::cin.get(); 
 }
 
-// Hardcoded Data Initialization
-void initializeInventory(std::vector<Item>& inventory, StockAlertManager& alertManager) {
-    // Creating a diverse dataset for testing all algorithms
-    // Arguments: ID, Name, Category, Quantity, MinStockThreshold
-    inventory.push_back(Item("101", "Laptop Pro", "Electronics", 5, 10)); // Low stock
-    inventory.push_back(Item("102", "Office Chair", "Furniture", 25, 5));
-    inventory.push_back(Item("103", "Mechanical Keyboard", "Electronics", 12, 15)); // Low stock
-    inventory.push_back(Item("104", "Desk Lamp", "Furniture", 40, 10));
-    inventory.push_back(Item("105", "4K Monitor", "Electronics", 8, 5));
-    
-    // Set thresholds in alert manager
-    for (const auto& item : inventory) {
-        alertManager.setMinimumThreshold(item.getId(), item.getMinStockThreshold());
-    }
-}
-
+//Adjusted main to parse all three datasets.
 int main() {
 
-    // Main inventory vector and manager instances
     std::vector<Item> inventory;
     StockAlertManager alertManager;
     RestockManager restockManager;
     InventoryAlgorithms searchAlgo;
     
-    //Initialize inventory, but this is hardcoded for testing purposes.
-    initializeInventory(inventory, alertManager);
+    // --- NEW: Dataset Selection Menu ---
+    clearScreen(); 
+    displayLogo(); 
+    
+    std::cout << YELLOW << "[ SYSTEM INITIALIZATION ]" << RESET << std::endl;
+    std::cout << "Select the inventory dataset to load:" << std::endl;
+    std::cout << "1. Retail Store Inventory" << std::endl;
+    std::cout << "2. Grocery Inventory and Sales Dataset" << std::endl;
+    std::cout << "3. Sales Data" << std::endl;
+    std::cout << "\nEnter choice (1-3): ";
+
+    //I used if and else if for choosing which dataset to load. Note that hardcoding is gone.
+    int datasetChoice;
+    std::string targetCSV = "assets/retail_store_inventory.csv"; // Default fallback
+    
+    if (std::cin >> datasetChoice) {
+        if (datasetChoice == 2) {
+            targetCSV = "assets/Grocery_Inventory_and_Sales_Dataset.csv";
+        } else if (datasetChoice == 3) {
+            targetCSV = "assets/sales_data.csv";
+        }
+    } else {
+        // Clear invalid input
+        std::cin.clear();
+        std::cin.ignore(100, '\n');
+    }
+
+    // --- Load Inventory from Selected CSV ---
+    std::cout << "\nLoading inventory database from " << targetCSV << "..." << std::endl;
+    loadInventoryFromCSV(targetCSV, inventory, alertManager);
+    wait();
+    // -----------------------------------
 
     // Main loop for the dashboard interface
     bool running = true;
     while (running) {
-        clearScreen(); //We clean terminal 
+        clearScreen(); 
         displayLogo(); 
 
         std::cout << YELLOW << "[ MAIN DASHBOARD ]" << RESET << std::endl;
@@ -88,16 +101,14 @@ int main() {
         std::cout << "6. Exit System" << std::endl;
         std::cout << "\nSelect an operation: ";
 
-        //Input validation for what the user selects in the menu and ignore invalid input.
         int choice;
         if (!(std::cin >> choice)) {
             std::cin.clear();
-            std::cin.ignore(100, '\n'); // Clear the error state and ignore invalid input
+            std::cin.ignore(100, '\n'); 
             std::cout << RED << "Invalid input. Please enter a number corresponding to the menu" << RESET << std::endl;
             continue;
         }
 
-        //Zybooks code from like old stuff from my previous classes.
         switch (choice) {
             case 1: { // Display Table
                 clearScreen();
@@ -109,7 +120,6 @@ int main() {
                           << std::setw(10) << "Threshold" << std::endl;
                 std::cout << std::string(70, '-') << std::endl;
                 
-                // Display each item in the inventory
                 for (const auto& item : inventory) {
                     std::cout << std::left << std::setw(10) << item.getId()
                               << std::setw(25) << item.getName()
@@ -117,8 +127,8 @@ int main() {
                               << std::setw(10) << item.getQuantity()
                               << std::setw(10) << item.getMinStockThreshold() << std::endl;
                 }
-                wait(); // Wait for user input before returning to menu
-                break; // We break after each case to return to the main menu after the operation is complete.
+                wait(); 
+                break; 
             }
             case 2: { // Linear Search
                 std::string target;
@@ -126,7 +136,6 @@ int main() {
                 std::cin.ignore();
                 std::getline(std::cin, target);
                 
-                // Perform linear search using the InventoryAlgorithms class, display the contents if gound.
                 int index = searchAlgo.linearSearch(inventory, target);
                 if (index != -1) {
                     std::cout << GREEN << "\nItem Found!" << RESET << std::endl;
@@ -152,7 +161,6 @@ int main() {
                 clearScreen();
                 std::cout << YELLOW << "--- CRITICAL STOCK ALERTS ---" << RESET << std::endl;
                 
-                // Create a map of inventory for the alert manager
                 std::unordered_map<std::string, int> currentInventory;
                 std::unordered_map<std::string, std::string> itemNames;
                 for (const auto& item : inventory) {
@@ -160,10 +168,8 @@ int main() {
                     itemNames[item.getId()] = item.getName();
                 }
                 
-                // Check thresholds, which will return a vector of items below min stocks.
                 std::vector<StockAlert> alerts = alertManager.checkThresholds(currentInventory, itemNames);
                 
-                // Display results in a table format. If there are no alerts, display a message indicating all items are above threshold.
                 if (alerts.empty()) {
                     std::cout << GREEN << "All items are above minimum threshold levels." << RESET << std::endl;
                 } else {
@@ -174,7 +180,6 @@ int main() {
                               << std::setw(10) << "Threshold" << std::endl;
                     std::cout << std::string(70, '-') << std::endl;
                     
-                    // Display each alert in the vector
                     for (const auto& alert : alerts) {
                         std::cout << std::left << std::setw(10) << alert.getId()
                                   << std::setw(25) << alert.getItemName()
@@ -197,8 +202,7 @@ int main() {
                 clearScreen();
                 std::cout << YELLOW << "--- GENERATING RESTOCKING PRIORITY ---" << RESET << std::endl;
                 
-                // Generate restock tasks for items below target quantity
-                int targetQuantity = 20; // Target stock level
+                int targetQuantity = 20; 
                 for (const auto& item : inventory) {
                     restockManager.addRestockTask(item, targetQuantity);
                 }
@@ -224,67 +228,7 @@ int main() {
                 wait();
                 break;
             }
-            case 6: { //Literal meme button make sure to delete this before committing, heheheha
-                std::cout << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                          << ":::::::::::::::::::::::::::::::::::::::-=*%@@@@%%%%%%###***=::::::::::::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::::::::-#@@@@@@@@@@@@@@@@@@@@@@@@@@@%=::::::::::::::::::::::::::::::::::\n"
-                          << ":::::::::::::::::::::::::::::::+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=:::::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::::=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:::::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::::+@@@@@@@@@@@@@@@@%##********###%@@@@@@@@@@@@@=:::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::::#@@@@@@@@@@@@@%**++++++++++++++++++++*%@@@@@@@@@+::::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::::#@@@@@@@@@@@%*++++++++++++++++++++++++++++*@@@@@@@@+:::::::::::::::::::::::::\n"
-                          << "::::::::::::::::::::+@@@@@@@@@@#++++++++++++++++++++++++++++++++++*@@@@@@@=::::::::::::::::::::::::\n"
-                          << ":::::::::::::::::::%@@@@@@@@@%*++++++++++++++++++++++++++++++++++++*%@@@@@@-:::::::::::::::::::::::\n"
-                          << "::::::::::::::::::@@@@@@@@@%*+++++++++++++++++++++++++++++++++++++++*@@@@@@%:::::::::::::::::::::::\n"
-                          << ":::::::::::::::::#@@@@@@@@@@@@@@@@@@@@@@@@@%%#**+++++++++++++++++++++#@@@@@@#::::::::::::::::::::::\n"
-                          << "::::::::::::::::-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*++++++++++++++++*%@@@@@@=:::::::::::::::::::::\n"
-                          << ":::::::::::::::+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*+++++++++++++*#@@@@@@%:::::::::::::::::::::\n"
-                          << ":::::::::::::#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+++++++++++++#%@@@@@@-::::::::::::::::::::\n"
-                          << ":::::::::::+@@@@@@@@@@*=----:::::::::---------*%%@@@@@@@@%++++++++++++*#@@@@@@*::::::::::::::::::::\n"
-                          << "::::::::::%@@@@@@@%=--:.....        ..:---------*###@@@@@@%*++++++++++*#%@@@@@@::::::::::::::::::::\n"
-                          << ":::::::::%@@@@@@#--:........        ...:---------####@@@@@@%++++++++++*##@@@@@@-:::::::::::::::::::\n"
-                          << "::::::::#@@@@@@---:..    . ..... .. ...----------#####@@@@@@#+++++++++*##@@@@@@+:::::::::::::::::::\n"
-                          << ":::::::+@@@@@#-----...............:::-----------=#####@@@@@@#++++++++++##%@@@@@%++==-:::::::::::::\n"
-                          << ":::::::%@@@@@:----------------------------------######@@@@@@#++++++++++###@@@@@@@@@@@@@@@%*=::::::\n"
-                          << "::::::-@@@@@%=--------------------------------=#######@@@@@@#++++++++++*##%@@@@@@@@@@@@@@@@@@#::::\n"
-                          << "::::::+@@@@@%##=----------------------------=#########@@@@@@#++++++++++*##%@@@@@@@@@@@@@@@@@@@%:::\n"
-                          << "::::::=@@@@@@###########***+++====-===+**############%@@@@@@*++++++++++*##%@@@@@%+*****#@@@@@@@+:::\n"
-                          << ":::::::@@@@@@@######################################@@@@@@@#+++++++++++*##%@@@@@@++++++++#@@@@@%:::\n"
-                          << ":::::::*@@@@@@@%###################################@@@@@@@%++++++++++++###%@@@@@@+++++++++@@@@@@+::\n"
-                          << "::::::::%@@@@@@@@%###############################%@@@@@@@%+++++++++++++###%@@@@@@*++++++++%@@@@@#::\n"
-                          << ":::::::::%@@@@@@@@@@@%#########################@@@@@@@@@#+++++++++++++*###%@@@@@@*****++++*@@@@@@::\n"
-                          << "::::::::::*@@@@@@@@@@@@@@@@%###############%@@@@@@@@@@@*++++++++++++++*###%@@@@@@%########*@@@@@@-:\n"
-                          << ":::::::::::+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*++++++++++++++++####%@@@@@@%#########@@@@@@=:\n"
-                          << ":::::::::::*@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#*+++++++++++++++++++#####@@@@@@%#########@@@@@@*:\n"
-                          << ":::::::::::*@@@@@@*+++*#%@@@@@@@@@@@@@@@@@@%#*+++++++++++++++++++++++*#####@@@@@@@#########%@@@@@%:\n"
-                          << ":::::::::::#@@@@@@+++++++++++********++++++++++++++++++++++++++++++++######@@@@@@@#########%@@@@@@:\n"
-                          << ":::::::::::#@@@@@%++++++++++++++++++++++++++++++++++++++++++++++++++*######@@@@@@@#########%@@@@@@-:\n"
-                          << ":::::::::::#@@@@@#++++++++++++++++++++++++++++++++++++++++++++++++++*######@@@@@@@#########%@@@@@@-:\n"
-                          << ":::::::::::#@@@@@%+++++++++++++++++++++++++++++++++++++++++++++++++*#######@@@@@@@##########@@@@@@=:\n"
-                          << ":::::::::::#@@@@@#*++++++++++++++++++++++++++++++++++++++++++++++++########@@@@@@@##########@@@@@@=:\n"
-                          << ":::::::::::%@@@@@#*+++++++++++++++++++++++++++++++++++++++++++++++*########@@@@@@@##########@@@@@@+:\n"
-                          << ":::::::::::%@@@@@##*++++++++++++++++++++++++++++++++++++++++++++++#########@@@@@@%##########@@@@@@*:\n"
-                          << ":::::::::::%@@@@@##*+++++++++++++++++++++++++++++++++++++++++++++*#########@@@@@@%##########@@@@@@*:\n"
-                          << ":::::::::::%@@@@@###*+++++++++++++++++++++++++++++++++++++++++++*##########@@@@@@%##########@@@@@@#:\n"
-                          << ":::::::::::#@@@@@####++++++++++++++++++++++++++++++++++++++++++*###########@@@@@@%##########@@@@@@#:\n"
-                          << ":::::::::::#@@@@@#####*+++++++++++++++++++++++++++++++++++++++*############@@@@@@%##########@@@@@@#:\n"
-                          << ":::::::::::*@@@@@######*+++++++++++++++++++++++++++++++++++++*############%@@@@@@%##########@@@@@@+:\n"
-                          << ":::::::::::+@@@@@%#######+++++++++++++++++++++++++++++++++++##############%@@@@@@##########%@@@@@@=:\n"
-                          << ":::::::::::=@@@@@@#########*++++++++++++++++++++++++++++**################%@@@@@@##########%@@@@@@-:\n"
-                          << ":::::::::::-@@@@@@##############****++++++++********######################%@@@@@@##########%@@@@@%::\n"
-                          << "::::::::::::%@@@@@%#######################################################%@@@@@@##########@@@@@@=::\n"
-                          << "::::::::::::#@@@@@@#######################################################%@@@@@@##########@@@@@%:::\n"
-                          << "::::::::::::=@@@@@@#######################################################%@@@@@@#########@@@@@@+:::\n"
-                          << ":::::::::::::@@@@@@%######################################################%@@@@@@#######%@@@@@@#::::\n" << std::endl;
-                wait(); 
-                running = false;
-                break;
-            }
-            case 7: { // Exit
+            case 6: { // Exit
                 std::cout << "Exiting ADK Warehouse Optimizer. Security log closed." << std::endl;
                 running = false;
                 break;
