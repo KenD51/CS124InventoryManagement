@@ -100,5 +100,8 @@ Good progress! There are a lot of specialized functionalities here! Are you sure
 - Sorting: Used to rank items by: quantity, urgency, popularity, reorder priority
 - Search algorithms: Used to find matching products quickly by keyword or ID.
 
+# Open source used
 
+-Zybooks for data structures + sorting 
+-Geek for geeks for ui construction 
 
